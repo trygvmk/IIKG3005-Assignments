@@ -3,10 +3,6 @@ data "azurerm_key_vault_secret" "vm_credentials" {
   key_vault_id = data.azurerm_key_vault.kv.id
 }
 
-data "azurerm_key_vault" "kv" {
-  id = split("/", var.keyvault_secret_id)[0]
-}
-
 locals {
   vm_credentials = jsondecode(data.azurerm_key_vault_secret.vm_credentials.value)
 }
