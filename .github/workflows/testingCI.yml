@@ -34,6 +34,13 @@ jobs:
         env:
           TF_VAR_subscription_id: ${{ env.ARM_SUBSCRIPTION_ID }}
 
+      - name: "Terraform destroy"
+        if: github.event.inputs.action_type == 'destroy'
+        run: terraform destroy -auto-approve
+        working-directory: ${{ env.WORKING_DIR }}
+        env:
+          TF_VAR_subscription_id: ${{ env.ARM_SUBSCRIPTION_ID }}
+
       - name: Test dev
         run: curl $(terraform output -raw primary_web_endpoint)
         working-directory: ${{ env.WORKING_DIR }}
@@ -55,6 +62,13 @@ jobs:
 
       - name: Terraform apply stage
         run: terraform apply -auto-approve
+        working-directory: ${{ env.WORKING_DIR }}
+        env:
+          TF_VAR_subscription_id: ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: "Terraform destroy"
+        if: github.event.inputs.action_type == 'destroy'
+        run: terraform destroy -auto-approve
         working-directory: ${{ env.WORKING_DIR }}
         env:
           TF_VAR_subscription_id: ${{ env.ARM_SUBSCRIPTION_ID }}
@@ -83,6 +97,13 @@ jobs:
 
       - name: Terraform apply prod
         run: terraform apply -auto-approve
+        working-directory: ${{ env.WORKING_DIR }}
+        env:
+          TF_VAR_subscription_id: ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: "Terraform destroy"
+        if: github.event.inputs.action_type == 'destroy'
+        run: terraform destroy -auto-approve
         working-directory: ${{ env.WORKING_DIR }}
         env:
           TF_VAR_subscription_id: ${{ env.ARM_SUBSCRIPTION_ID }}
