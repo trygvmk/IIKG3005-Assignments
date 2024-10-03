@@ -18,11 +18,16 @@ variable "sa_name" {
 variable "source_content" {
   type        = string
   description = "Source content for the index.html file"
-  default     = "<h1>Made with Terraform - CI/CD - update del 2</h1>"
+  default     = "<h1>Made with Terraform - CI/CD</h1>"
 }
 
 variable "index_document" {
   type        = string
   description = "Name of the index document"
   default     = "index.html"
+}
+
+variable "subscription_id" {
+  type        = string
+  description = "Azure Subscription ID"
 }
